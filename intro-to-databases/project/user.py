@@ -16,3 +16,11 @@ class User:
                 cursor.execute('INSERT INTO users (email, first_name, last_name) VALUES (%s, %s, %s)',
                                 (self.email, self.first_name, self.last_name))
    
+
+    @classmethod
+    def load_from_db_by_email(cls, email):
+        with psycopg2.connect(user='postgres', password='1234', database='learning', host='localhost') as connection:
+           with connection.cursor() as cursor:
+               cursor.execute('SELECT * FROM users WHERE email=%s', (email,))
+               user_data = cursor.fetchone()
+               return cls(user_data[1], user_data[2], user_data[3], user_data[0])     
