@@ -11,7 +11,8 @@ class Currency:
         return amount / self.exchange_to_usd
 
     def to_usd(self, amount=None):
-        return amount * self.exchange_to_usd
+        to_convert = amount or self.amount
+        return to_convert * self.exchange_to_usd
 
 
 pounds = Currency("GBP", 1.21)
