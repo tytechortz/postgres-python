@@ -14,6 +14,29 @@ class Currency:
         to_convert = amount or self.amount
         return to_convert * self.exchange_to_usd
 
+    def __eq__(self, other):
+        self.to_usd == other.to_usd()
+
+    def __gt__(self, other):
+        return self.to_usd() > other.to_usd()
+
+    def __lt__(self, other):
+        return self.to_usd() < other.to_usd()
+    
+    def __le__(self, other):
+        return self.to_usd() <= other.to_usd()
+
+    def __ge__(self, other):
+        return self.to_usd() >= other.to_usd()
+
 
 pounds = Currency("GBP", 1.21)
-print(pounds.to_usd(1000))
+pounds.set_amount(1000)
+euros = Currency("EUR", 1.07)
+euros.set_amount(1000)
+
+print("1000 pounds = {} dollars".format(pounds.to_usd()))
+print("1000 euros = {} dollars".format(euros.to_usd()))
+print(pounds.to_usd())
+print(euros.to_usd())
+print(pounds > euros)
